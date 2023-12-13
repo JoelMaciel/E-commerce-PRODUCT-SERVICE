@@ -1,4 +1,4 @@
-package com.joelmaciel.productservice.api.controller.config;
+package com.joelmaciel.productservice.api.config;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
