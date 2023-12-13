@@ -1,11 +1,10 @@
 package com.joelmaciel.productservice.domain.entitty;
 
 import lombok.*;
+import org.hibernate.annotations.Type;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Entity
@@ -14,13 +13,15 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Table(name = "products")
 public class Product {
 
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Type(type = "uuid-char")
     private UUID productId;
-    private String productName;
-
-    private Long productPrice;
+    private String name;
+    private BigDecimal price;
+    private Integer quantity;
 }
