@@ -1,0 +1,23 @@
+version: '3.9'
+
+services:
+  mysql_users:
+    image: mysql:8.0-debian
+    container_name: mysql_products
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: products
+    volumes:
+      - data-mysql-products:/var/lib/mysql
+    restart: always
+    networks:
+      - microservices_network
+
+volumes:
+  data-mysql-products:
+
+networks:
+  microservices_network:
+    driver: bridge

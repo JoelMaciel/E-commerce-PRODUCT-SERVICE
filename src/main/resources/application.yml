@@ -3,21 +3,21 @@ server:
 
 spring:
   application:
-    name: kuber-users
+    name: PRODUCT-SERVICE
   datasource:
-    url: jdbc:mysql://${DB_HOST:localhost}:3306/productdb?createDatabaseIfNotExist=true&serverTimezone=UTC
+    url: jdbc:mysql://${DB_HOST:localhost}:3306/products?createDatabaseIfNotExist=true&serverTimezone=UTC
     username: ${DB_USERNAME:root}
     password: ${DB_PASSWORD:root}
   flyway:
     locations: classpath:db/migration,classpath:db/testdata
-    table: schema_history_users
-    jpa:
-      show-sql: true
-      properties:
-        hibernate:
-          dialect: org.hibernate.dialect.MySQL8Dialect
-          jdbc:
-            lob.non-contextual-creation: true
+    baselineOnMigrate: true
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        jdbc:
+          lob.non-contextual-creation: true
     jackson:
       deserialization:
         fail-on-unknown-properties: true
@@ -31,3 +31,12 @@ spring:
   logging:
     file:
       path: /app/logs
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: ${EUREKA_SERVER_ADDRESS:http://localhost:8761/eureka}
