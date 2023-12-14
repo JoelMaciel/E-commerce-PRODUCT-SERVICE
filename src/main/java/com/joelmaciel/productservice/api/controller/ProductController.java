@@ -28,4 +28,9 @@ public class ProductController {
         return productService.saveProduct(productRequest);
     }
 
+    @PutMapping("/reduceQuantity/{productId}")
+    public void reduceQuantity(@PathVariable UUID productId, @RequestParam Integer quantity) {
+        productService.reduceQuantity(productId, quantity);
+    }
+
 }
