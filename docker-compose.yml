@@ -1,7 +1,7 @@
 version: '3.9'
 
 services:
-  mysql_users:
+  mysql_products:
     image: mysql:8.0-debian
     container_name: mysql_products
     ports:
