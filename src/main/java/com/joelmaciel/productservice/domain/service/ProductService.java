@@ -12,4 +12,6 @@ public interface ProductService {
     ProductDTO findById(UUID productId);
 
     Product findProductId(UUID productId);
+
+    void reduceQuantity(UUID productId, Integer quantity);
 }
