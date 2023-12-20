@@ -5,6 +5,7 @@ import com.joelmaciel.productservice.domain.model.ProductDTO;
 import com.joelmaciel.productservice.domain.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -17,11 +18,13 @@ public class ProductController {
 
     private final ProductService productService;
 
+    @PreAuthorize("hasAuthority('Admin') || hasAuthority('Customer') || hasAuthority('SCOPE_internal')")
     @GetMapping("/{productId}")
     public ProductDTO getByProductId(@PathVariable UUID productId) {
         return productService.findById(productId);
     }
 
+    @PreAuthorize("hasAuthority('Admin') || hasAuthority('Customer') || hasAuthority('SCOPE_internal')")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ProductDTO addProduct(@RequestBody @Valid ProductRequest productRequest) {
